@@ -1,0 +1,24 @@
+{% include '_header.html' %}
+</head>
+<body>
+
+<div class="container">
+    <h1>IMPORTAR TRANSAÇÕES</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="formFile" class="form-label">Envie seu arquivo</label>
+            <input class="form-control" type="file" id="formFile" name="file">
+        </div>
+        <button type="submit" class="btn btn-success">Importar</button>
+    </form>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+</div>
+</body>
+</html>
