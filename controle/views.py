@@ -11,7 +11,7 @@ from controle.models import Transacao
 
 
 def index(request):
-    form = FileForm()
+    t = Transacao.objects.all().order_by('-data_transacao')
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -36,10 +36,8 @@ def index(request):
                     valor=v[6],
                     data_transacao=v[7]
                     )
-            '''
             form.save()
-            '''
     data = {
-        'form': form
+        'transacao': t
     }
     return render(request, 'index.html', data)

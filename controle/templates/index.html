@@ -19,6 +19,27 @@
         {% endfor %}
       </ul>
     {% endif %}
+
+
+    <section  class="m-3">
+        <h2 class="text-center"> IMPORTAÇÕES REALIZADAS </h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">DATA TRANSAÇÕES</th>
+                    <th scope="col">DATA IMPORTAÇÂO</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for t in transacao %}
+                <tr>
+                    <td>{{t.data_transacao}}</td>
+                    <td>{{t.data_importacao}}</td>
+                </tr>
+            {% endfor %}
+             </tbody>
+        </table>
+    </section>
 </div>
 </body>
 </html>
