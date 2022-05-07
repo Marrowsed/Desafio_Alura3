@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from datetime import datetime
+
 
 class Controller(models.Model):
     file = models.FileField(upload_to='arquivos/', blank=False)
@@ -8,6 +8,7 @@ class Controller(models.Model):
 
     def __str__(self):
         return f"Arquivo: {self.file}"
+
 
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,6 +18,7 @@ class Usuario(models.Model):
 
     def __str__(self):
         return f"{self.nome}"
+
 
 class Transacao(models.Model):
     user = models.OneToOneField(Usuario, on_delete=models.CASCADE)
