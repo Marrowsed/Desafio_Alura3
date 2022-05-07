@@ -1,0 +1,45 @@
+{% include '_header.html' %}
+</head>
+<body>
+
+{% include '_nav.html' %}
+<h1 class="text-center"> USUÁRIOS CADASTRADOS </h1>
+<a type="button" class="btn btn-info ml-3" href="#">Novo</a>
+    <section  class="m-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOME</th>
+                    <th scope="col">E-MAIL</th>
+                    <th scope="col">OPÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for u in usuarios %}
+            {% if not u.user.is_superuser %}
+                <tr>
+                    <td>{{u.id}}</td>
+                    <td>{{u.nome}}</td>
+                    <td>{{u.email}}</td>
+                    <td><a href="{% url 'edita_usuario' u.id %}" type="button" class="btn btn-info">Editar</a>
+                        {% if u.id != request.user.id %}
+                        <a href="#" type="button" class="btn btn-danger">Remover</a>
+                        {% else %}
+                        <button class="btn btn-danger" onclick="cantRemove()">Remover</button>
+                        {% endif%}
+                    </td>
+                </tr>
+            {% endif%}
+            {% endfor %}
+             </tbody>
+        </table>
+    </section>
+
+<script>
+    function cantRemove() {
+        alert("Você não pode se remover !");
+        }
+</script>
+</body>
+</html>
