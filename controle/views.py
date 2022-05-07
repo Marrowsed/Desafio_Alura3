@@ -105,6 +105,16 @@ def deleta_usuario(request):
 @login_required(login_url="login")
 def edita_usuario(request, pk):
     u = Usuario.objects.get(pk=pk)
+    if request.method == 'POST':
+        nome = request.POST['nome']
+        email = request.POST['email']
+        if Usuario.objects.filter(email=email).exists():
+            messages.info(request, 'E-mail em uso !', extra_tags="alert alert-danger")
+        else:
+            u.nome = nome
+            u.email = email
+            u.save()
+            return redirect('usuarios')
 
     data = {
         'usuario': u

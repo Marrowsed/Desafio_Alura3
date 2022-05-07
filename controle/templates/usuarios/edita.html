@@ -4,5 +4,32 @@
 
 {% include '_nav.html' %}
 
+ <section class="container border border-1 shadow-sm p-3 my-3">
+        <h1 class="text-center"> EDITAR USUÁRIO </h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <div class="mt-3">
+                    <label for="nome">Nome</label>
+                    <input for="username" class="form-control" name="nome" value="{{usuario.nome}}">
+                </div>
+                <div class="mt-3">
+                    <label for="email">Email</label>
+                    <input for="email" type="email" class="form-control" name="email"required value="{{usuario.email}}">
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Editar</button>
+            </div>
+        </form>
+    </section>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
 </body>
 </html>
