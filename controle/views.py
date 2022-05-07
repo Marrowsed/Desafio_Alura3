@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from controle.decorator import unauthenticated_user
-from controle.forms import *
+from controle.forms import FileForm
 from controle.functions import *
 from controle.models import Transacao, Usuario
 
@@ -16,7 +16,7 @@ from controle.models import Transacao, Usuario
 @login_required(login_url="login")
 def index(request):
     t = Transacao.objects.all().order_by('-data_transacao')
-    u = Usuario.objects.get(user=request.user)
+    u = Usuario.objects.get(user=request.user.id)
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -42,7 +42,6 @@ def index(request):
                     valor=v[6],
                     data_transacao=v[7]
                 )
-            form.save()
     data = {
         'transacao': t
     }
@@ -99,8 +98,12 @@ def cria_usuario(request):
     pass
 
 @login_required(login_url="login")
-def deleta_usuario(request):
-    pass
+def deleta_usuario(request, pk):
+    u = Usuario.objects.get(pk=pk)
+    user = u.user
+    user.is_active = False
+    user.save()
+    return redirect('usuarios')
 
 @login_required(login_url="login")
 def edita_usuario(request, pk):

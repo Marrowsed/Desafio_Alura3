@@ -24,7 +24,7 @@
                     <td>{{u.email}}</td>
                     <td><a href="{% url 'edita_usuario' u.id %}" type="button" class="btn btn-info">Editar</a>
                         {% if u.id != request.user.id %}
-                        <a href="#" type="button" class="btn btn-danger">Remover</a>
+                        <a href="{% url 'deleta_usuario' u.id %}" type="button" class="btn btn-danger">Remover</a>
                         {% else %}
                         <button class="btn btn-danger" onclick="cantRemove()">Remover</button>
                         {% endif%}
