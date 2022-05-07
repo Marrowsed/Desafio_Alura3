@@ -21,6 +21,9 @@
             </div>
         </form>
     </section>
+    <div class="container mb-3 text-center">
+                <a type="button" class="btn btn-info" href="{% url 'cadastro' %}">Novo Cadastro !</a>
+    </div>
     {% if messages %}
       <ul class="messages">
         {% for message in messages %}
