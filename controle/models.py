@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 
@@ -8,7 +9,17 @@ class Controller(models.Model):
     def __str__(self):
         return f"Arquivo: {self.file}"
 
+class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    senha = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.nome}"
+
 class Transacao(models.Model):
+    user = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     banco_origem = models.CharField(max_length=100, blank=False)
     agencia_origem = models.CharField(max_length=4, blank=False)
     conta_origem = models.CharField(max_length=7, blank=False)

@@ -1,0 +1,33 @@
+{% include '_header.html' %}
+</head>
+<body>
+
+<h1 class="text-center">SISTEMA DE ANÁLISE DE TRANSAÇÕES FINANCEIRAS</h1>
+<section class="container border border-1 shadow-sm p-3 my-3">
+    <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <div class="mt-3">
+                    <label for="email">Email</label>
+                    <input for="email" name="email" class="form-control" placeholder="Digite o email" required>
+                </div>
+                <div class="mt-3">
+                    <label for="senha">Senha</label>
+                    <input for="senha" type="password" class="form-control" name="senha" placeholder="Digite a senha" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Entrar</button>
+            </div>
+        </form>
+    </section>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+</body>
+</html>

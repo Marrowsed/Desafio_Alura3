@@ -2,8 +2,10 @@
 </head>
 <body>
 
+{% include '_nav.html' %}
+
 <div class="container">
-    <h1>IMPORTAR TRANSAÇÕES</h1>
+    <h1 class="text-center my-3">IMPORTAR TRANSAÇÕES</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
@@ -20,21 +22,22 @@
       </ul>
     {% endif %}
 
-
     <section  class="m-3">
-        <h2 class="text-center"> IMPORTAÇÕES REALIZADAS </h2>
+        <h1 class="text-center"> IMPORTAÇÕES REALIZADAS </h1>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">DATA TRANSAÇÕES</th>
                     <th scope="col">DATA IMPORTAÇÂO</th>
+                    <th scope="col">OPÇÕES</th>
                 </tr>
             </thead>
             <tbody>
             {% for t in transacao %}
                 <tr>
-                    <td>{{t.data_transacao}}</td>
-                    <td>{{t.data_importacao}}</td>
+                    <td>{{t.data_transacao | date:"SHORT_DATE_FORMAT"}}</td>
+                    <td>{{t.data_importacao| date:"SHORT_DATE_FORMAT"}} - {{t.data_importacao | time:"H:i:s"}}</td>
+                    <td><a href="{% url 'detalhes' t.id %}" type="button" class="btn btn-info">Detalhar</a></td>
                 </tr>
             {% endfor %}
              </tbody>

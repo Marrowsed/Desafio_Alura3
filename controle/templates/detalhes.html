@@ -1,0 +1,68 @@
+{% include '_header.html' %}
+</head>
+<body>
+
+{% include '_nav.html' %}
+ <h1 class="text-center my-3">DETALHES DA IMPORTAÇÃO</h1>
+ <section class="container-md border border-1 shadow-sm p-3 my-3">
+        <div class="container gap-3">
+            <div class="row gx-2">
+                <div class="col-3">
+                    <p>Importado em </p>
+                </div>
+                <div class="col border px-3 py-1 border-2">
+                    <span>{{transacao.data_importacao| date:"SHORT_DATE_FORMAT"}} - {{transacao.data_importacao| time:"H:i"}}</span>
+                </div>
+            </div>
+            <div class="row gx-2">
+                <div class="col-3">
+                    <p>Importado por </p>
+                </div>
+                <div class="col border px-3 py-1 border-2">
+                    <span>{{transacao.user.nome}}</span>
+                </div>
+            </div>
+            <div class="row gx-2">
+                <div class="col-3">
+                    <p>Data transações </p>
+                </div>
+                <div class="col border px-3 py-1 border-2">
+                    <span>{{transacao.data_transacao| date:"SHORT_DATE_FORMAT"}}</span>
+                </div>
+            </div>
+        </div>
+   </section>
+    <section class="container-md border border-1 shadow-sm p-3 my-3">
+        <h1 class="text-center my-3">TRANSAÇÕES IMPORTADAS</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th colspan="3">Origem</th>
+                    <th colspan="3">Destino</th>
+                    <th rowspan="2" class="align-middle col-2">Valor</th>
+                </tr>
+                <tr class="text-center">
+                    <th class="col-2">Banco</th>
+                    <th>Agência</th>
+                    <th>Conta</th>
+                    <th class="col-2">Banco</th>
+                    <th>Agência</th>
+                    <th>Conta</th>
+                </tr>
+            </thead>
+            <tbody class="text-capitalize">
+                <tr>
+                    <td>{{transacao.banco_origem}}</td>
+                    <td>{{transacao.agencia_origem}}</td>
+                    <td>{{transacao.conta_origem}}</td>
+                    <td>{{transacao.banco_destino}}</td>
+                    <td>{{transacao.agencia_destino}}</td>
+                    <td>{{transacao.conta_destino}}</td>
+                    <td class="text-end real">{{transacao.valor}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+</body>
+</html>
