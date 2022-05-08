@@ -3,8 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from controle.forms import FileForm
-from controle.functions import *
-from controle.models import Transacao, Usuario
+from controle.uploads import *
 
 from datetime import datetime
 
@@ -19,27 +18,32 @@ def index(request):
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             excel = request.FILES['file']
-            arquivo = get_csv(excel)
-            if not get_length(arquivo):
-                messages.error(request, "Arquivo vazio !", extra_tags='alert alert-danger')
-                return redirect(index)
-            valida_vazio = is_empty(arquivo)
-            valida_data = validate_date(valida_vazio)
-            if get_duplicado(valida_data) != 0:
-                messages.error(request, "Transação Duplicada !", extra_tags='alert alert-danger')
-                return redirect(index)
-            for v in valida_data:
-                Transacao.objects.create(
-                    user=u,
-                    banco_origem=v[0],
-                    agencia_origem=v[1],
-                    conta_origem=v[2],
-                    banco_destino=v[3],
-                    agencia_destino=v[4],
-                    conta_destino=v[5],
-                    valor=v[6],
-                    data_transacao=v[7]
-                )
+            if str(excel).split('.')[-1] == 'csv':
+                arquivo = get_csv(excel)
+                if not get_length(arquivo):
+                    messages.error(request, "Arquivo vazio !", extra_tags='alert alert-danger')
+                    return redirect(index)
+                valida_vazio = is_empty(arquivo)
+                valida_data = validate_date(valida_vazio)
+                if get_duplicado(valida_data) != 0:
+                    messages.error(request, "Transação Duplicada !", extra_tags='alert alert-danger')
+                    return redirect(index)
+                for v in valida_data:
+                    Transacao.objects.create(
+                        user=u,
+                        banco_origem=v[0],
+                        agencia_origem=v[1],
+                        conta_origem=v[2],
+                        banco_destino=v[3],
+                        agencia_destino=v[4],
+                        conta_destino=v[5],
+                        valor=v[6],
+                        data_transacao=v[7]
+                    )
+            elif str(excel).split('.')[-1] == 'xml':
+                get_xml(excel, request)
+            else:
+                messages.error(request, "Arquivo Inválido !", extra_tags='alert alert-danger')
     data = {
         'transacao': t
     }
