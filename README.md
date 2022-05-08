@@ -2,6 +2,7 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/PyCharm-000000.svg?&style=for-the-badge&logo=PyCharm&logoColor=white)
+[![CodeQL](https://github.com/Marrowsed/Desafio_Alura3/actions/workflows/codeql.yml/badge.svg)](https://github.com/Marrowsed/Desafio_Alura3/actions/workflows/codeql.yml)
 # Desafio_Alura3
 #alurachallengebackend3
 
