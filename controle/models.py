@@ -21,7 +21,7 @@ class Usuario(models.Model):
 
 
 class Transacao(models.Model):
-    user = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     banco_origem = models.CharField(max_length=100, blank=False)
     agencia_origem = models.CharField(max_length=4, blank=False)
     conta_origem = models.CharField(max_length=7, blank=False)

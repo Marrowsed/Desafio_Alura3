@@ -3,6 +3,7 @@ from controle.views import *
 urlpatterns = [
     path('', index, name='index'),
     path('<int:pk>', detalhes, name='detalhes'),
+    path('suspeitas', suspeitas, name='suspeitas'),
     #URLs de acesso
     path('cadastro', cadastro, name="cadastro"),
     path('login', entrar, name='login'),

@@ -6,6 +6,7 @@ from controle.forms import FileForm
 from controle.functions import *
 from controle.models import Transacao, Usuario
 
+from datetime import datetime
 
 
 # Create your views here.
@@ -44,6 +45,7 @@ def index(request):
     }
     return render(request, 'index.html', data)
 
+
 @login_required(login_url="login")
 def detalhes(request, pk):
     t = Transacao.objects.get(pk=pk)
@@ -53,3 +55,30 @@ def detalhes(request, pk):
     }
 
     return render(request, 'detalhes.html', data)
+
+
+@login_required(login_url="login")
+def suspeitas(request):
+    pesquisa = f'{datetime.now().year}-{datetime.now().month:02}'
+    data = {
+        'pesquisa': pesquisa
+    }
+
+    if request.GET.get('pesquisa'):
+        pesquisa = request.GET.get('pesquisa')
+        ano, mes = pesquisa.split('-')
+        data.update({'pesquisa': pesquisa})
+        if Transacao.objects.filter(data_transacao__month=mes, data_transacao__year=ano).exists():
+            v = Transacao.objects.filter(data_transacao__month=mes, data_transacao__year=ano)
+            transacao_suspeita = v.filter(valor__gte=100_000)
+            conta_suspeita = get_conta_suspeita(ano, mes)
+            agencia_suspeita = get_agencia_suspeita(ano, mes)
+            data.update({
+                't_suspeita': transacao_suspeita,
+                'c_suspeita': conta_suspeita,
+                'a_suspeita': agencia_suspeita
+            })
+        else:
+            messages.error(request, "Não há nenhuma transação suspeita !", extra_tags='alert alert-danger')
+
+    return render(request, 'suspeitas.html', data)

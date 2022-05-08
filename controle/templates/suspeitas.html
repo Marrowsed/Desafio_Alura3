@@ -1,0 +1,113 @@
+{% include '_header.html' %}
+</head>
+<body>
+{% load humanize %}
+{% include '_nav.html' %}
+<h1 class="text-center my-3">ANÁLISE DE TRANSAÇÕES SUSPEITAS</h1>
+<section class="container-md border border-1 shadow-sm p-3 my-3">
+    <form action="{% url 'suspeitas' %}" method="GET" class="form">
+        <p class="form-message">Selecione o mês para realizar o upload</p>
+        <input type="month" id="month" name="pesquisa" value="{{pesquisa}}" required>
+        <button type="submit" class="btn btn-info">Realizar Análise</button>
+      </form>
+</section>
+
+
+<section class="container-md border border-1 shadow-sm p-3 my-3">
+    <h2 class="text-center my-3">TRANSAÇÕES SUSPEITAS</h2>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th colspan="3">Origem</th>
+                    <th colspan="3">Destino</th>
+                    <th rowspan="2" class="align-middle col-2">Valor</th>
+                </tr>
+                <tr class="text-center">
+                    <th class="col-2">Banco</th>
+                    <th>Agência</th>
+                    <th>Conta</th>
+                    <th class="col-2">Banco</th>
+                    <th>Agência</th>
+                    <th>Conta</th>
+                </tr>
+            </thead>
+            {% if t_suspeita == None %}
+            <tbody class="text-capitalize">
+            <p>Não há transações suspeitas !</p>
+            {% else %}
+            {% for t in t_suspeita %}
+                <tr>
+                    <td>{{t.banco_origem}}</td>
+                    <td>{{t.agencia_origem}}</td>
+                    <td>{{t.conta_origem}}</td>
+                    <td>{{t.banco_destino}}</td>
+                    <td>{{t.agencia_destino}}</td>
+                    <td>{{t.conta_destino}}</td>
+                    <td class="text-end real">R${{t.valor|floatformat:2|intcomma}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </section>
+
+<section class="container-md border border-1 shadow-sm p-3 my-3">
+    <h2 class="text-center my-3">CONTAS SUSPEITAS</h2>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th>BANCO</th>
+                    <th>AGÊNCIA</th>
+                    <th>CONTA</th>
+                    <th>VALOR MOVIMENTADO</th>
+                    <th>TIPO MOVIMENTAÇÃO</th>
+                </tr>
+            </thead>
+            {% if c_suspeita == None %}
+            <tbody class="text-capitalize">
+            <p>Não há nenhuma conta suspeita !</p>
+            {% else %}
+            {% for c in c_suspeita %}
+                <tr>
+                    <td>{{c.banco}}</td>
+                    <td>{{c.agencia}}</td>
+                    <td>{{c.conta}}</td>
+                    <td>R${{c.valor_suspeito|floatformat:2|intcomma}}</td>
+                    <td>{{c.tipo_movimentacao}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {% endif%}
+        </table>
+    </section>
+
+<section class="container-md border border-1 shadow-sm p-3 my-3">
+    <h2 class="text-center my-3">AGÊNCIAS SUSPEITAS</h2>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th>BANCO</th>
+                    <th>AGÊNCIA</th>
+                    <th>VALOR MOVIMENTADO</th>
+                    <th>TIPO MOVIMENTAÇÃO</th>
+                </tr>
+            </thead>
+            {% if a_suspeita == None %}
+            <tbody class="text-capitalize">
+            <p>Não há nenhuma agência suspeita !</p>
+            {% else %}
+            {% for a in a_suspeita %}
+                <tr>
+                    <td>{{a.banco}}</td>
+                    <td>{{a.agencia}}</td>
+                    <td>R${{a.valor_suspeito|floatformat:2|intcomma}}</td>
+                    <td>{{a.tipo_movimentacao}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            {% endif%}
+        </table>
+    </section>
+
+</body>
+</html>
