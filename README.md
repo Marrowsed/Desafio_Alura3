@@ -50,3 +50,4 @@ python manage.py runserver
 
 O servidor está rodando, visite http://127.0.0.1:8000/ no seu navegador de internet
 
+![Alura](https://media.discordapp.net/attachments/973568663959502888/973568782947737620/Badge_Alura_Challenge_back_First_v3.png?width=701&height=701)
