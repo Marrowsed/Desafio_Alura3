@@ -6,9 +6,15 @@
 # Desafio_Alura3
 #alurachallengebackend3
 
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | Desafio_Alura3
+| :label: Tecnologias | python, django, postgresql
+| :fire: Desafio     | https://www.alura.com.br/challenges/back-end-3?host=https://cursos.alura.com.br
+
 ## ✔️ Técnicas e tecnologias utilizadas
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Django_logo.svg/2560px-Django_logo.svg.png" alt="Logo do Django">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Django_logo.svg/2560px-Django_logo.svg.png#vitrinedev" alt="Logo do Django">
 
 - ``Python``
 - ``PostgreSQL``
